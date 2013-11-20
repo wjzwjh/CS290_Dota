@@ -1,0 +1,7 @@
+<b>Comment:</b>
+ <br>
+ <% @video.comment.split(/\n/).each do |comment| %>
+ <%=comment%>
+ <br></br>
+ <%end%>
+</p>

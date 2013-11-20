@@ -1,0 +1,153 @@
+<%= javascript_include_tag "jwplayer" %>
+<%= javascript_include_tag "jwplayer.html5" %>
+<%= javascript_include_tag "jquery-1.4.1.min" %>
+<%= stylesheet_link_tag "featured_slide" %>
+<%= stylesheet_link_tag "forms" %>
+<%= stylesheet_link_tag "layout" %>
+<%= stylesheet_link_tag "navi" %>
+<%= stylesheet_link_tag "tables" %>
+<%= stylesheet_link_tag "homepage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
+<head profile="http://gmpg.org/xfn/11">
+  <title>Dota Planet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="imagetoolbar" content="no" />
+  <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+</head>
+<body id="top">
+<div class="wrapper col1">
+  <div id="header">
+    <div class="fl_left">
+      <h1><a href="#">Dota Planet</a></h1>
+
+    </div>
+
+    <br class="clear" />
+    <div id="signIn">
+      <% if session[:userName]!=nil %>
+          <!--<span id="notSignIn"><%#=link_to "Sign In" ,login_url %></span>-->
+          <div id="welcomeUser" >Hi,<span id="text"><%=session[:userName]%></span><img style="display:none;" alt="FB_profil_image" id="thumbnail" width="40px" height="40px"></div>
+          <div id="signOutNow"><span id><%=link_to "Sign Out",logout_url,:method => 'delete',:id =>"log_out" %></span></div>
+          <div id="Myorder"><span id><%=link_to "My Order",orders_url%></span></div>
+      <% else %>
+          <span id="notSignIn"><%=link_to "Sign In" ,login_url %></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- ####################################################################################################### -->
+<div class="wrapper col2">
+  <div id="topbar">
+    <div id="topnav">
+      <ul>
+        <li><a href='/users'>Home</a>
+         </li>
+        <li><a href=<%=store_url%>>Store</a>
+         </li>
+        <li><a href=<%=video_store_url%>>Video</a>
+        </li>
+
+        <li><a href='/galleries'>Gallery</a>
+
+        </li>
+        <li><a href="#">Contact</a>
+
+        </li>
+        <li><a href="#">About Us</a>
+
+        </li>
+        <!--<li class="last"><a href="#">External Links</a></li>-->
+
+      </ul>
+
+    </div>
+
+    <div id="search">
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Site Search</legend>
+          <input type="text" value="Search Our Website&hellip;"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+          <input type="submit" name="go" id="go" value="Search" />
+        </fieldset>
+      </form>
+    </div>
+    <br class="clear" />
+
+  </div>
+
+</div>
+
+<!-- ####################################################################################################### -->
+<div class="wrapper col3">
+  <script type="text/javascript">jwplayer.key="EM0y59lCwb0uR9FL/JIgoq3QWFDpneewOP2x/g==";</script>
+  <center><div id="video" style="width: 90%; margin-left: 95px;">Loading the player ...</div></center>
+  <script type="text/javascript">
+      jwplayer("video").setup({
+          flashplayer: "<%=asset_path('jwplayer.flash.swf')%>",
+          image:"/cs.jpg",
+          file: "/1.mp4",
+          autostart:true,
+          height: 500,
+          width: 900,
+          analytics: {
+              enabled: false,
+              cookies: false
+          }
+      });
+
+      FB.getLoginStatus(function(response){
+          if(response.status === 'connected'){ //already logged in and authorized
+              var uid = response.authResponse.userID,
+                      accessToken = response.authResponse.accessToken;
+//            alert(uid)
+              $.ajax({
+                  url: "http://graph.facebook.com/"+uid+"/picture?type=large&redirect=false",
+                  type:"get", //send it through get method
+                  success: function(response) {
+                      $("#thumbnail").show()
+                      $("#thumbnail").attr('src',response.data.url)
+//                      $("<%#= escape_javascript(render @products) %>").appendTo(".entry");
+                  },
+                  error: function(xhr) {
+                      //Do Something to handle error
+                  }
+              });
+
+//            loginWithFB(accessToken);
+          }
+          else{ //not logged in/authorized, do login
+
+          }
+      });
+  </script>
+
+
+</div>
+
+<!-- ####################################################################################################### -->
+
+<div class="wrapper col5">
+  <div id="footer">
+
+
+    <br class="clear" />
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div class="wrapper col6">
+  <div id="copyright">
+    <div style="float:left" class="fb-like" data-href="http://31241a95.ngrok.com/" data-width="120px" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+    <div style="float:left" class="fb-share-button" data-href="http://31241a95.ngrok.com/" data-width="60" data-type="button_count"></div>
+
+    <div style="clear:both"></div>
+    <!--<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.4siteconsulting.co.uk%2Fcase-study-2.html&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>-->
+    <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
+
+    <p class="fl_left">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <br class="clear" />
+  </div>
+</div>
+</body>
+</html>

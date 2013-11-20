@@ -1,0 +1,148 @@
+<%= stylesheet_link_tag "featured_slide" %>
+<%= stylesheet_link_tag "forms" %>
+<%= stylesheet_link_tag "layout" %>
+<%= stylesheet_link_tag "navi" %>
+<%= stylesheet_link_tag "tables" %>
+<%= stylesheet_link_tag "homepage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
+<head profile="http://gmpg.org/xfn/11">
+<title>Dota Planet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="stylesheet" href="styles/layout.css" type="text/css" />
+<script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript" src="scripts/jquery.nivo.slider.setup.js"></script>
+</head>
+<body id="top">
+<div class="wrapper col1">
+  <div id="header">
+    <div class="fl_left">
+      <h1><a href="#">Dota Planet</a></h1>
+      
+    </div>
+    <div class="fl_right"><a href="#"><img src="images/demo/468x60.gif" alt="" /></a></div>
+    <br class="clear" />
+<div id="signIn">
+  <% if session[:userName]!=nil %>
+   <!--<span id="notSignIn"><%#=link_to "Sign In" ,login_url %></span>-->
+   <div id="welcomeUser" >Hi, <span id="text"><%=session[:userName]%></span></div>
+   <div id="signOutNow"><span id><%=link_to "Sign Out",logout_url,{:style=>'color:#000000;margin-left:500px;padding:0px 0px 0px 365px; ', :class => "css_class"},:method => 'delete',:id =>"log_out" %></span></div>
+   <% else %>
+    <span id="notSignIn"><%=link_to "Sign In" ,login_url %></span>
+     <% end %>
+</div>
+  </div>
+</div>
+
+<!-- ####################################################################################################### -->
+<div class="wrapper col2">
+  <div id="topbar">
+    <div id="topnav">
+      <ul>
+        <li><a href='/users'>Home</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li><a href=<%=store_url%>>Store</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+	<li><a href=<%=video_store_url%>>Video</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+		
+        <li><a href="#">Others</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Contact</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">About Us</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li class="last"><a href="#">External Links</a></li>
+
+      </ul>
+
+    </div>
+
+    <div id="search">
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Site Search</legend>
+          <input type="text" value="Search Our Website&hellip;"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+          <input type="submit" name="go" id="go" value="Search" />
+        </fieldset>
+      </form>
+    </div>
+    <br class="clear" />
+	  
+</div>
+
+</div>
+
+<!-- ####################################################################################################### -->
+<div class="wrapper col3">
+ 	<script type="text/javascript">jwplayer.key="EM0y59lCwb0uR9FL/JIgoq3QWFDpneewOP2x/g==";</script>
+<center><div id="video" style="width: 90%; margin-left: 95px;">Loading the player ...</div></center>
+<script type="text/javascript">
+    jwplayer("video").setup({
+        flashplayer: "<%=asset_path('jwplayer.flash.swf')%>",
+        image:"/cs.jpg",
+        file: "/1.mp4",
+        autostart:true,
+        height: 700,
+        width: 1200,
+        analytics: {
+            enabled: false,
+            cookies: false
+        }
+    });
+</script>
+
+   
+</div>
+
+<!-- ####################################################################################################### -->
+
+<div class="wrapper col5">
+  <div id="footer">
+
+    
+    <br class="clear" />
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div class="wrapper col6">
+  <div id="copyright">
+    <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
+    <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <br class="clear" />
+  </div>
+</div>
+</body>
+</html>

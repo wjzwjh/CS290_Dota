@@ -1,0 +1,26 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<%= stylesheet_link_tag "cart" %>
+<!--<div class='cart_title'>Your Cart</div>-->
+<!--<table width="500px">-->
+<%# @cart.line_items.each do |item| %>
+  <!--<tr>-->
+   <!--<td width="20%"><%#= item.quantity %> &times;</td>-->
+   <!--<td  width="60%" style="text-align: right;margin-left: 50px"><%#= item.product.title %> </td>-->
+  <!--</tr>-->
+  <%# end %>
+  <%= render @cart %>
+
+
+
+  <!--<tr class="total_line">-->
+    <!--<td width="70%">Total:</td>-->
+    <!--<td class="total_cell" width="20px"><%#= number_to_currency(@cart.total_price) %></td>-->
+  <!--</tr>-->
+
+<!--</table>-->
+
+
+<%#= button_to 'Empty cart', @cart, method: :delete,
+              data: { confirm: 'Are you sure?' } %>

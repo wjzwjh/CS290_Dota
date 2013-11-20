@@ -1,0 +1,8 @@
+<b style="float:left;clear:both;margin-top: 20px;margin-bottom: -10px;font-size: 20px; color:#000000">Review:</b>
+<div style="clear:both"></div>
+<br>
+<textarea class="txt_area" style="color: black;text-align:left; background-color: white;float:left"  readonly="true" rows="10" cols="70">
+  <% @product.comment.split(/\n/).reverse.each do |comment| %>
+      <%=comment%>
+  <%end%>
+</textarea>

@@ -1,0 +1,181 @@
+<html>
+<head>
+<a href="/home"> <title>DotaPlanet</title></a>
+  <%= stylesheet_link_tag    "application", :media => "none" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+<script type="text/javascript">
+
+      window.fbAsyncInit = function() {
+
+          var    appId = '142776242496903';
+
+
+          FB.init({
+              appId      : appId,
+              status     : true,
+              cookie     : true,
+              xfbml      : true,
+              oauth      : true,
+          });
+      };
+      (function(d){
+          var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+          js = d.createElement('script'); js.id = id; js.async = true;
+          js.src = "//connect.facebook.net/en_US/all.js";
+          d.getElementsByTagName('head')[0].appendChild(js);
+      }(document));
+
+
+</script>
+  <script type="text/javascript">
+
+      window.onload= function(){
+          FB.getLoginStatus(function(response){
+              if(response.status === 'connected'){ //already logged in and authorized
+                  var uid = response.authResponse.userID,
+                          accessToken = response.authResponse.accessToken;
+//            alert(uid)
+                  jQuery.ajax({
+                      url: "http://graph.facebook.com/"+uid+"/picture?type=large&redirect=false",
+                      type:"get",
+                      success: function(response) {
+                          jQuery("#thumbnail").show()
+                          jQuery("#thumbnail").attr('src',response.data.url)
+//                      $("<%#= escape_javascript(render @products) %>").appendTo(".entry");
+                      },
+                      error: function(xhr) {
+                          //Do Something to handle error
+                      }
+                  });
+
+//            loginWithFB(accessToken);
+              }
+              else{ //not logged in/authorized, do login
+
+              }
+          });
+      };
+  </script>
+</head>
+<body>
+
+<%= stylesheet_link_tag "featured_slide" %>
+<%= stylesheet_link_tag "forms" %>
+<%= stylesheet_link_tag "layout" %>
+<%= stylesheet_link_tag "navi" %>
+<%= stylesheet_link_tag "tables" %>
+<%= stylesheet_link_tag "homepage" %>
+
+
+
+<div class="wrapper col1">
+  <div id="header">
+    <div class="fl_left">
+      <h1><a href="/home">Dota Planet</a></h1>
+
+    </div>
+
+    <br class="clear" />
+    <div id="signIn">
+      <% if session[:userName]!=nil %>
+
+          <!--<span id="notSignIn"><%#=link_to "Sign In" ,login_url %></span>-->
+          <div id="welcomeUser" >Hi, <span id="text"><%=session[:userName]%></span> <img style="display:none;" alt="FB_profil_image" id="thumbnail" width="40px" height="40px"></div>
+
+          <div id="signOutNow"><%=link_to "Sign Out" ,logout_url,:method => 'delete',:id =>"log_out" %></div>
+      <% else %>
+          <span id="notSignIn"><%=link_to "Sign In" ,login_url %></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div class="wrapper col2">
+  <div id="topbar">
+    <div id="topnav">
+      <ul>
+        <li><a href='/home'>Home</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li><a href="/store">Store</a>
+          <ul>
+            <li><%=link_to "Items",store_url%></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li><a href=<%=video_store_url%>>Video</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+
+        <li><a href='/galleries'>Gallery</a>
+
+        </li>
+        <li><a href="#">Contact</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">About Us</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <!--<li class="last"><a href="#">External Links</a></li>-->
+
+      </ul>
+
+    </div>
+
+
+    <div id="search">
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Site Search</legend>
+          <input type="text" value="Search Our Website&hellip;"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+          <input type="submit" name="go" id="go" value="Search" />
+        </fieldset>
+      </form>
+    </div>
+
+
+    <br class="clear" />
+
+  </div>
+
+</div>
+
+<!-- ####################################################################################################### -->
+<div id="main">
+  <%= yield %>
+</div>
+
+<div class="wrapper col6" style="clear:both;">
+  <div id="copyright">
+    <div style="float:left" class="fb-like" data-href="http://31241a95.ngrok.com/" data-width="120px" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+    <div style="float:left" class="fb-share-button" data-href="http://31241a95.ngrok.com/" data-width="60" data-type="button_count"></div>
+    <div style="clear:both"></div>
+    <!--<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.4siteconsulting.co.uk%2Fcase-study-2.html&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>-->
+    <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
+
+    <p class="fl_left">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <br class="clear" />
+  </div>
+</div>
+
+</body>
+</html>

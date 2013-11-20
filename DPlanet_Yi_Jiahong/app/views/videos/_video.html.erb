@@ -1,0 +1,7 @@
+<b>Comment:</b>
+<br>
+<textarea class="txt_area" style="color: black;text-align:left; background-color: white;float:left"  readonly="true" rows="10" cols="70">
+  <% @video.comment.split(/\n/).reverse.each do |comment| %>
+      <%=comment%>
+  <%end%>
+</textarea>

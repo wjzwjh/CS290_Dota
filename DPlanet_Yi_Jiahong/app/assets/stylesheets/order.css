@@ -1,0 +1,53 @@
+
+fieldset {
+    background: #efe;
+}
+legend {
+    color: #dfd;
+    background: #141;
+    font-family: sans-serif;
+    padding: 0.2em 1em;
+}
+
+
+label {
+    width: 5em;
+    float: left;
+    text-align: right;
+    padding-top: 0.8em;
+    margin-right: 0.1em;
+    display: block;
+}
+
+select, textarea, input {
+    margin-left: 0.5em;
+
+    margin-top: 10px;
+}
+#back{
+    font: 14px Arial;
+    text-decoration: none;
+    background-color: lightgray;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    border-radius: 3px;
+
+}
+a{
+    text-decoration: none;
+}
+.submit {
+    margin-left: 4em;
+}
+br {
+    display: none
+}
+
+#place_order{
+    margin-top:10px ;
+}
+

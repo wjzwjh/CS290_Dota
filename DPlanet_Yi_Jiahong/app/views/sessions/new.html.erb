@@ -1,0 +1,160 @@
+
+<div class="login">
+  <% if flash[:alert] %>
+      <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+  <%= stylesheet_link_tag "login" %>
+  <%= form_tag do %>
+      <div id="login_title">Please Sign in</div>
+
+      <div id='noAccount'><p>If you do not have an account, <a href="/users/register">Click here</a> to sign up</p></div>
+
+      <div id="userNameField">
+        <label for='userName' id='userNameLabel'>Username:</label>
+        <%=text_field_tag :userName,params[:userName],:id => 'userName' %>
+      </div>
+
+      <div id="passwordField" >
+        <label for='passwordLabel' id='passwordLabel'>Password:</label>
+        <%=password_field_tag :password,params[:password],:id => 'password' %>
+      </div>
+
+      <p id="notice" style="padding-left: 130px;display: none"><%= notice %></p>
+
+      <div id='login'>
+        <%=submit_tag "Login", :class =>'bluebutton cssbutton', :id =>'loginbtn'%>
+      </div>
+
+      <div id='loginFB'>
+        <%=image_tag("login_facebook.png", :id =>"facebookPic")%>
+     </div>
+
+  <% end %>
+
+</div>
+
+<script type="text/javascript" "></script>
+<script>
+    if($("#notice").text() == "Invalid userName/password")
+        $("#notice").show()
+</script>
+
+
+<script type="text/javascript" "></script>
+<script>
+    window.fbAsyncInit = function() {
+        var currentHref = window.location.href, appId;
+        if(currentHref.indexOf('dev.activity-tracking.appspot.com') != -1){
+            appId = '278699858893415';
+        }
+        else if(currentHref.indexOf('dev-james.activity-tracking.appspot.com') != -1){
+            appId = '286405711453230';
+        }
+        else if(currentHref.indexOf('dev-rabor.activity-tracking.appspot.com') != -1){
+            appId = '360951367298919';
+        }
+        else if(currentHref.indexOf('spinningtracker.activity-tracking.appspot.com') != -1){
+            appId = '425964900755486';
+        }
+        else{ //my.digifit.com
+            appId = '142776242496903';
+        }
+
+        FB.init({
+            appId      : appId,
+            status     : true,
+            cookie     : true,
+            xfbml      : true,
+            oauth      : true,
+        });
+    };
+    (function(d){
+        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+
+    $(document).ready(function(){
+
+        $('#facebookPic').unbind().bind("click",function() {
+//
+//    function loginWithFB(accessToken){
+//        DigifitWebApi.authenticateFB({
+//            token: accessToken
+//        });
+//    }
+
+
+            FB.getLoginStatus(function(response){
+
+                if(response.status === 'connected'){ //already logged in and authorized
+                    var uid = response.authResponse.userID,
+                            accessToken = response.authResponse.accessToken;
+                    FB.api(
+                            {
+                                method: 'fql.query',
+                                query: 'SELECT name, email FROM user WHERE uid='+uid
+                            },
+                            function(response) {
+                                var form = document.createElement("form");
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/users");
+
+                                var userNameField = document.createElement("input");
+                                userNameField.setAttribute("type", "hidden");
+                                userNameField.setAttribute("name", "user[userName]");
+                                userNameField.setAttribute("value",response[0].name );
+                                var passwordField = document.createElement("input");
+                                passwordField.setAttribute("type", "hidden");
+                                passwordField.setAttribute("name", "user[password]");
+                                passwordField.setAttribute("value",uid);
+                                form.appendChild(userNameField);
+                                form.appendChild(passwordField);
+                                document.body.appendChild(form);
+                                form.submit();
+                            }
+                    );
+//            loginWithFB(accessToken);
+                }
+                else{ //not logged in/authorized, do login
+                    FB.login(function(response){
+                        if(response.authResponse){
+                            var uid = response.authResponse.userID,
+                                    accessToken = response.authResponse.accessToken;
+                            FB.api(
+                                    {
+                                        method: 'fql.query',
+                                        query: 'SELECT name, email FROM user WHERE uid='+uid
+                                    },
+                                    function(response) {
+                                        var form = document.createElement("form");
+                                        form.setAttribute("method", "post");
+                                        form.setAttribute("action", "/users");
+
+                                        var userNameField = document.createElement("input");
+                                        userNameField.setAttribute("type", "hidden");
+                                        userNameField.setAttribute("name", "user[userName]");
+                                        userNameField.setAttribute("value",response[0].name );
+                                        var passwordField = document.createElement("input");
+                                        passwordField.setAttribute("type", "password");
+                                        passwordField.setAttribute("name", "user[password]");
+                                        passwordField.setAttribute("value",accessToken.substring(0,32));
+                                        form.appendChild(userNameField);
+                                        form.appendChild(passwordField);
+                                        document.body.appendChild(form);
+                                        form.submit();
+
+                                    }
+                            );
+//                    loginWithFB(accessToken);
+                        }
+                        else{
+                            //console.log('User cancelled login or did not fully authorize.');
+                        }
+                    }, { scope : 'email' });
+                }
+            });
+        });
+    })
+</script>

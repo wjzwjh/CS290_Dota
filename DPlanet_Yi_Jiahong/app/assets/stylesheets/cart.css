@@ -1,0 +1,109 @@
+.cart_title{
+    font: 120% bold;
+}
+
+ .total_line {
+    text-align: right;
+     width:80%
+}
+.total_cell {
+     width:50px;
+          text-align: right;
+    font-weight: bold;
+    border: 1px solid #595;
+}
+a{color:saddlebrown;}
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:hover {text-decoration:underline;color:#1a6493}
+
+#delete{
+    background-color: lightgray;
+}
+
+th{
+    text-align: center;
+}
+
+ #price{
+    text-align:center
+}
+#empty_chart{
+    float:left;
+    padding-top: 10px;
+}
+
+#check_out{
+    float:right;
+    padding-right: 20px;
+    padding-top: 10px;
+
+}
+
+.checkout{
+    float:left;
+    padding-right: 20px;
+}
+.item_price{
+   text-align: right;
+}
+
+#continue_shopping{
+
+}
+.bluebutton{
+    width:50px;
+    padding-top: 50px;
+    color:#FFFFFF;
+    border: solid 1px #1a6493;
+    background: linear-gradient(to bottom,#4b97c8 50%, #1a6493 100%);
+}
+
+.cssbutton{
+    display:inline-block;
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 8px;
+    padding: 5px;
+    /*margin: 0.2em 0.4em;*/
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.bluebutton2{
+    width:160px;
+    padding-top: 50px;
+    color:#FFFFFF;
+    border: solid 1px #1a6493;
+    background: linear-gradient(to bottom,#4b97c8 50%, #1a6493 100%);
+}
+
+.cssbutton2{
+    display:inline-block;
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 10px;
+    padding: 0.9em 2em 0.7em;
+    /*margin: 0.2em 0.4em;*/
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/*.cart_title{*/
+    /*front: 120% bold;*/
+/*}*/
+/*.item_price, .total_line {*/
+    /*text-align: right;*/
+/*}*/
+/*.total_line .total_cell {*/
+    /*font-weight: bold;*/
+    /*border-top: 1px solid #595;*/
+/*}*/

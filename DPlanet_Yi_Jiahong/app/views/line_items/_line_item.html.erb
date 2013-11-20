@@ -1,0 +1,38 @@
+<%= javascript_include_tag "jquery-1.4.1.min" %>
+<style type="text/css">
+    html {
+        background-color: lightgray;
+    }
+
+</style>
+<% if line_item == @current_item %>
+<tr id="current_item">
+
+<% else %>
+<tr>
+<% end %>
+
+  <!--<td>&times;</td>-->
+  <td><img src="/assets/<%= line_item.product.image_url %>" alt="cs"  width="150px" height="200px"/></td>
+  <td><%= line_item.product.title %></td>
+  <td><%= line_item.product.description %></td>
+  <td width="150px">
+    <form style="float:left" data-remote="true" id="quantity<%= line_item.product.id.to_s%>" >
+      <!--<input type="text"  style="text-align: center" size="1" value=<%#= line_item.quantity %> />-->
+      <input style="text-align: center" type='text' class="changeQty"  size='8' id="Qty<%= line_item.product.id.to_s%>"  value=<%= line_item.quantity %>  />
+      </form>
+      <input type="button" value='update' class="cssbutton bluebutton button_to" id ="product<%= line_item.product.id.to_s %>" /></td>
+  <td> <%= link_to 'Remove', line_item, method: :delete,
+                  :id =>'delete' %></td>
+  <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
+
+<script type="text/javascript" "></script>
+<script>
+    $('#product<%= line_item.product.id.to_s%>').bind('click',function(){
+        $('#quantity<%= line_item.product.id.to_s%>').attr("action", "/line_items?product_id=<%= line_item.product.id.to_s%>"+"&product_qty="+$('#Qty<%= line_item.product.id.to_s%>').val()+"&checkout=true")
+        $('#quantity<%= line_item.product.id.to_s%>').attr("method","post")
+        $('#quantity<%= line_item.product.id.to_s%>').submit()
+    })
+</script>
+</tr>
+

@@ -1,0 +1,116 @@
+html{
+    background-image: url("dota2.png");
+    min-height: 100%;
+    max-height: 100%;
+    background-size: cover;
+    /*background-color: red;*/
+
+}
+body {
+
+    min-height: 100%;
+    max-height: 100%;
+
+    font-family: verdana, arial, helvetica, sans-serif;
+    /*font-size: 13px;*/
+    /*line-height: 18px;*/
+}
+
+p{
+    color:limegreen;
+}
+
+#login_title{
+    padding-top: 40px;
+    font-size :55px;
+    color: red;
+    font-family: Arial,courier;
+}
+#userNameLabel{
+    color:#1a6493;
+    font-size: 23px;
+
+}
+
+#passwordLabel{
+    color:#1a6493;
+    font-size: 23px;
+
+}
+
+
+#userName{
+    width:320px;
+    margin-left: 8px;
+    height:25px;
+}
+
+#userNameField{
+    padding-bottom:8px;
+    padding-top:15px;
+}
+#passwordField{
+    padding-bottom:8px;
+    padding-top:5px;
+    padding-left:3px;
+}
+
+#password{
+    width:320px;
+    margin-left: 10px;
+    height:25px;
+}
+
+#loginbtn{
+    padding-top: 10px;
+    cursor:pointer;
+}
+
+
+.bluebutton{
+    width:450px;
+    color:#FFFFFF;
+    border: solid 1px #1a6493;
+    background: linear-gradient(to bottom,#4b97c8 50%, #1a6493 100%);
+}
+
+.cssbutton{
+    display:inline-block;
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 19px;
+    padding: 0.58em 2em 0.5em;
+    margin: 0.2em 0.4em;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+
+
+}
+
+#login{
+    padding-top: 20px;
+    cursor: pointer;
+
+}
+
+#loginFB{
+    width :447px;
+    padding-top: 15px;
+    padding-left: 9px;
+}
+
+#facebookPic{
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+}
+
+
+#noAccount {
+    padding-top: 5px;
+    font-size: 25px;
+}

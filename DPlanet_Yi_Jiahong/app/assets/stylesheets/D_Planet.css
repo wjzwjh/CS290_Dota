@@ -1,0 +1,109 @@
+#title{
+   font-size :55px;
+    padding-top:40px;
+        color: red;
+   font-family: Arial,courier;
+}
+
+#0wnAccountdiv {
+    padding-top: 5px;
+    font-size: 5px;
+}
+
+p{
+    color:limegreen;
+    padding-top: 20px;
+}
+a{color:orangered;}
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:hover {text-decoration:underline;color:#1a6493}
+#userNameLabel{
+    color:#1a6493;
+}
+
+#passwordLabel{
+    color:#1a6493;
+}
+
+#confirmLabel{
+    color:#1a6493;
+}
+
+#userName{
+    width:320px;
+    height:25px;
+    margin-left:6px
+}
+
+#userNameField{
+    padding-bottom:8px;
+}
+
+#password{
+    width:320px;
+    height:25px;
+    margin-left:6px
+}
+
+#passwordField{
+    padding-bottom:8px;
+}
+
+#confirmInput{
+   width:320px;
+   height:25px;
+   margin-left:6px
+}
+
+#confirmation{
+    padding-bottom:8px;
+}
+
+#signUp{
+    padding-top: 25px;
+
+}
+
+
+.bluebutton{
+    width:450px;
+    color:#FFFFFF;
+    border: solid 1px #1a6493;
+    background: linear-gradient(to bottom,#4b97c8 50%, #1a6493 100%);
+}
+
+.cssbutton{
+    display:inline-block;
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 16px;
+    padding: 0.58em 2em 0.5em;
+    margin: 0.2em 0.4em;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+
+
+}
+
+#submit{
+    cursor:pointer;
+}
+
+#registerTable{
+    padding-top:20px;
+
+}
+
+/*sign in*/
+
+#login_title{
+    font-size :20px;
+    color: red;
+    font-family: Arial,courier;
+}
+

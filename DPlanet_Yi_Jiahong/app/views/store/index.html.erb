@@ -1,0 +1,49 @@
+<%= javascript_include_tag "jquery-1.4.1.min" %>
+<% if notice %>
+<p id="notice" style="margin-left: 5px;color:red"><%= notice %></p>
+<% end %>
+
+<%= stylesheet_link_tag "store" %>
+
+<%=form_tag store_path, :method => 'get' do %>
+    <p>
+      <%= select_tag :kind,options_for_select(["All","T-Shirt","Toy"]), :onchange => "this.form.submit();" , :prompt=>"Version"%>
+    </p>
+<% end %>
+
+<div style="clear:both"></div>
+<% @products.each do |product| %>
+    <div class="entry">
+      <div class="items">
+      <%#= link_to image_tag("cs.jpg")%>
+      <a href="/products/<%= product.id.to_s %>"><img src="/assets/<%= product.image_url %>" alt="cs"/> </a>
+      <a href="/products/<%= product.id.to_s %>"> <h3><%= product.title %><p style="font-size:10px;color:red;display:inline;position: absolute;left:59%" >Quantity</p></h3> </a>
+
+      <p style="float:left"><%= sanitize(product.description) %></p>
+      <form id="quantity<%= product.id.to_s%>" >
+      <input style="float:left;text-align: center" type='text' class="changeQty"  value='1'  size='8px' id="Qty<%= product.id.to_s%>" />
+      </form>
+      <div style="clear:both"></div>
+      <div class="price_line">
+        <span class="price"><%= number_to_currency(product.price) %></span>
+       <input type="button" value='Add to Cart' class="cssbutton bluebutton button_to" id ="product<%= product.id.to_s %>" />
+
+      </div>
+
+
+   <script type="text/javascript">
+      jQuery('#product<%= product.id.to_s%>').bind('click',function(){
+          if(jQuery('#notSignIn').is(':visible')){
+              alert("You need to login first for shopping")
+              return
+          }
+          jQuery('#quantity<%= product.id.to_s%>').attr("action", "/line_items?product_id=<%= product.id.to_s%>"+"&product_qty="+jQuery('#Qty<%= product.id.to_s%>').val())
+          jQuery('#quantity<%= product.id.to_s%>').attr("method","post")
+          jQuery('#quantity<%= product.id.to_s%>').submit()
+      })
+
+
+   </script>
+    </div>
+    </div>
+<% end %>

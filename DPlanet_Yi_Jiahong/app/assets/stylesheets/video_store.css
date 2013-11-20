@@ -1,0 +1,116 @@
+html{
+    background-color: lightgray;
+}
+h1 {
+    margin: 0;
+    padding-bottom: 0.5em;
+    font:  150% sans-serif;
+    color: #226;
+    /*border-bottom: 3px dotted #77d;*/
+}
+h2{
+    margin: 0;
+    padding-bottom: 0.5em;
+    font:  150% sans-serif;
+    color: #226;
+    border-bottom: 3px dotted #77d;
+}
+
+/* An entry in the store catalog */
+.entry {
+    overflow: auto;
+    margin-top: 1em;
+    border-bottom: 1px dotted #77d;
+    min-height: 100px;
+}
+#watch_video{
+    background-color: lightgray;
+}
+#kind{
+    float:right;
+}
+img {
+    width: 80px;
+    height:60px;
+
+    margin-right: 5px;
+    margin-bottom: 10px;
+    position: absolute;
+}
+
+h3 {
+    font-size: 180%;
+    font-family: sans-serif;
+    margin-left: 100px;
+    margin-top: 0;
+    margin-bottom: 2px;
+    color:#a9cf54
+}
+
+
+    p, div.price_line {
+      margin-left: 98px;
+          margin-top: 0.5em;
+      margin-bottom: 0.8em;
+
+  }
+
+    .price {
+      color: #44a;
+      font-weight: bold;
+      margin-right: 3em;
+  }
+
+    /*form,div{*/
+        /*display:inline*/
+    /*}*/
+
+ .button_to{
+     float:right;
+     margin-top: -50px;
+
+ }
+
+ .changeQty{
+     position: absolute;
+     left:65.6%
+
+ }
+    #signOut{
+        font-size: 10px;text-align:right; display: block
+    }
+    #signIn{
+    font-size: 20px;text-align:right; display: block
+}
+a{color:saddlebrown;}
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:hover {text-decoration:underline;color:#1a6493}
+
+
+.bluebutton{
+    width:120px;
+    padding-top: 50px;
+    color:#FFFFFF;
+    border: solid 1px #1a6493;
+    background: linear-gradient(to bottom,#4b97c8 50%, #1a6493 100%);
+}
+
+.cssbutton{
+    display:inline-block;
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 12px;
+    padding: 0.52em 2em 0.5em;
+    margin: 0.2em 0.4em;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+
+
+}
+
+/* END_HIGHLIGHT */

@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+<%= stylesheet_link_tag "product" %>
+<div id="product_image">
+
+  <img src="/assets/<%= @product.image_url %>" alt="cs" width="300px" height="400px"/>
+</div>
+
+<div id="product_description">
+    <h2><%= @product.title %></h2>
+    <p> by <a href="#">Dota_Planet</a></p>
+
+    <hr width="800px">
+    <span id="price">price: <%= @product.price %></span>
+    <span id="category" style="display:block">category: <%= @product.category %></span>
+    <div id="inStock" style="font-size: 30px;font-weight: bold; color:lightgreen"> In stock</div>
+    <div id="description" >
+       Description:<%= @product.description %>
+
+    </div>
+</div>
+
+<div id="addCart">
+
+<!--<div id="check_out">-->
+  <form id="quantity<%= @product.id.to_s%>" class="quantity">
+   <span style="padding-left: 7px"> Quantity: </span><input style="text-align: center" type='text' class="changeQty"  value='1'  size='1px' id="Qty<%= @product.id.to_s%>" />
+
+
+  </form>
+  <div style="padding-top: 10px; margin-left: 10px"><input type="button" value='Add to Cart' class="cssbutton bluebutton button_to" id ="product<%= @product.id.to_s %>" /></div>
+
+</div>
+
+<script type="text/javascript" "></script>
+<script>
+    $('#product<%= @product.id.to_s%>').bind('click',function(){
+        $('#quantity<%= @product.id.to_s%>').attr("action", "/line_items?product_id=<%= @product.id.to_s%>"+"&product_qty="+$('#Qty<%= @product.id.to_s%>').val())
+        $('#quantity<%= @product.id.to_s%>').attr("method","post")
+        $('#quantity<%= @product.id.to_s%>').submit()
+    })
+</script>
+
+
+<div id="comment">
+  <%=render @product%>
+</div>
+
+<!--Make Comment-->
+<%=form_tag products_path,:remote => true, :method => 'get' do %>
+    <p>
+      <span style="float:left;clear:both;color:#000000;margin-top: 10px;font-size: 20px;font-family: "Times New Roman";">Make Review:</span>
+      <%= text_area_tag :comment, params[:comment],:cols => "90", :rows => "5" ,:id =>"text_area"%>
+      <%= hidden_field_tag 'id', @product.id %>
+      <%= submit_tag "Comment", :name => nil,:id =>"commentbtn" %>
+    </p>
+<% end %>
+
