@@ -1,0 +1,72 @@
+
+#welcomeUser{
+    margin-left: 80px;
+    margin-bottom:15px;
+    color:black;
+    float:right;
+    padding:20px 20px 0px 0px;
+    font-size: 20px;
+}
+
+#welcome{
+
+    color:black;
+    float:right;
+    /*padding-bottom: 20px;*/
+    /*margin-top:-20px;*/
+
+    /*padding:20px 20px 0px 0px;*/
+    font-size: 16px;
+}
+#thumbnail{
+    display:inline;
+    width:40px;
+    height:40px;
+
+}
+#welcomeUser img{
+    width:40px ;
+    display:inline;
+    height:40px;
+}
+#Myorder{
+    float:right;
+    padding-right: 20px;
+    color:black;
+
+}
+#wallet{
+    float:right;
+    padding-right: 10px;
+    color:black;
+
+}
+#signOutNow{
+
+
+    padding-bottom: 20px;
+    margin:-20px;
+    /*padding:20px 20px 0px 0px;*/
+    font-size: 16px;
+}
+
+#sign_out{
+
+    color:black;
+    margin-top:0px;
+    /*padding:20px 20px 0px 0px;*/
+    padding-top: 40px;
+    font-size: 20px;
+    margin-right: -50px;
+}
+
+#log_out{
+    padding-left: 90.52% ;
+    color:black;
+}
+
+#notSignIn{
+   margin-left: 92%;
+   font-size: 20px;
+
+}

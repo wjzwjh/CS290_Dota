@@ -1,0 +1,124 @@
+<p id="notice"><%= notice %></p>
+<!--play the video-->
+<script type="text/javascript">jwplayer.key="EM0y59lCwb0uR9FL/JIgoq3QWFDpneewOP2x/g==";</script>
+<center><div id="video" style="width: 90%; margin-left: 95px;">Loading the player ...</div></center>
+<script type="text/javascript">
+    jwplayer("video").setup({
+        flashplayer: "<%=asset_path('jwplayer.flash.swf')%>",
+        image:"/cs.jpg",
+        file: "/1.mp4",
+//        autostart:true,
+        height: 300,
+        width: 1000,
+        analytics: {
+            enabled: false,
+            cookies: false
+        }
+    });
+</script>
+
+<!--Video Info, title,description,type,comment//-->
+<p>
+  <b>Title:</b>
+  <%= @video.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @video.description %>
+</p>
+<p>
+  <b>Type:</b>
+  <%= @video.kind %>
+</p>
+<p>
+ <b>Comment:</b>
+ <br>
+ <% @video.comment.split(/\n/).each do |comment| %>
+ <%=comment%>
+ <br></br>
+ <%end%>
+</p>
+
+<!--Make Comment-->
+<%=form_tag videos_path, :method => 'get' do %>
+    <p>
+      <%= text_area_tag :comment, params[:comment],:cols => "70", :rows => "5" %>
+      <%= hidden_field_tag 'id', @video.id %>
+      <%= submit_tag "Comment", :name => nil %>
+    </p>
+<% end %>
+
+
+<!--show edit only to auth-->
+<%if session[:userName]=="SJF"%>
+    <%= link_to 'Edit', edit_video_path(@video) %> |
+    <%= link_to 'Back', videos_path %>
+<%end%>
+
+<!--function only for commentary video-->
+<%if @video.kind=="comment"%>
+    <%if @video.id<10%>
+        <%temp_id="00"+@video.id.to_s+"/"%>
+    <%elsif @video.id<100%>
+        <%temp_id="0"+@video.id.to_s+"/"%>
+    <%end%>
+    <%files = Dir.glob("/home/sjfsuperman/Dota_Planet/public/000/000/"+temp_id+'/*.mp3')%>
+    <%sjf=Array.new%>
+    <% files.each do|file|%>
+     <%sjf<<(file[50,file.length])  %>
+    <%end%>
+
+    <!--upload function only for commentary video-->
+    <%if session[:userName]=="JF"%>
+        <%if @video.kind=="comment"%>
+            <%= @video.avatar_file_name %>
+        <%end%>
+
+        <%=form_tag videos_path, :method => 'get',:html => {:multipart => true} do %>
+            <p>
+              <%= file_field_tag :asset,multiple: true  %>
+              <%= hidden_field_tag 'id', @video.id %>
+              <%= submit_tag "Upload", :name => nil %>
+            </p>
+        <% end %>
+
+
+
+     <%end%>
+
+
+    <% if @video.comment_version!="None"%>
+        <%=form_tag videos_path, :method => 'get' do %>
+            <p>
+            <%= select_tag :comment_version, options_for_select(sjf), :onchange => "this.form.submit();" %>
+            <%= hidden_field_tag 'id', @video.id %>
+            </p>
+        <% end %>
+        <%if @video.id<10%>
+            <%temp_id="00"+@video.id.to_s+"/"%>
+        <%elsif @video.id<100%>
+            <%temp_id="0"+@video.id.to_s+"/"%>
+        <%end%>
+        <script type="text/javascript">jwplayer.key="EM0y59lCwb0uR9FL/JIgoq3QWFDpneewOP2x/g==";</script>
+        <div id="music1" style="width: 90%; margin-left: 95px;">Loading the player ...</div>
+        <script type="text/javascript">
+            jwplayer("music1").setup({
+                flashplayer: "<%=asset_path('jwplayer.flash.swf')%>",
+                image:"/cs.jpg",
+                file: "<%="/000/000/"+temp_id+@video.comment_version%>",
+                autostart:true,
+                height: 1,
+                width: 1,
+                analytics: {
+                    enabled: false,
+                    cookies: false
+                }
+            });
+        </script>
+    <%end%>
+<%end%>
+
+
+
+

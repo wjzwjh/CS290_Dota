@@ -1,0 +1,53 @@
+<%= stylesheet_link_tag "cart" %>
+<div class="cart_title">Your Cart</div>
+<table width="85%">
+  <th width="200px"></th>
+  <th width="300px">Name</th>
+  <th width="400px">Description</th>
+  <th >Quantity</th>
+  <th></th>
+  <th id="price">price</th>
+  <hr/>
+  <%= render(cart.line_items) %>
+
+  <tr class="total_line">
+    <td></td>
+
+
+    <td></td>
+    <td></td>
+    <td style="text-align: right"colspan="2">Total</td>
+    <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
+  </tr>
+
+</table>
+<hr/>
+<!-- START_HIGHLIGHT -->
+
+<!-- END_HIGHLIGHT -->
+<div id="empty_chart">
+<%= button_to 'Empty cart', cart, method: :delete,
+    data: { confirm: 'Are you sure?' },:class =>"bluebutton2 cssbutton2"%>
+</div>
+
+<div style="float:left;padding:10px">
+<a href="/store"><input type="button" value="Continue shopping" class="bluebutton2 cssbutton2" /> </a>
+</div>
+
+<div id="check_out">
+
+  <%= button_to "Checkout", new_order_path, method: :get, :class =>"bluebutton2 cssbutton2 checkout"%>
+</div>
+
+<script type="text/javascript">
+    $('.checkout').bind('click',function(e){
+
+        if (parseInt($('.total_cell').text().substring(1).replace(",","")) > <%= User.find_by_userName(session[:userName]).wallet%>){
+            alert('Not enough money')
+            e.preventDefault();
+
+        }
+
+    })
+
+</script>

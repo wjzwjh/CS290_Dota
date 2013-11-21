@@ -1,0 +1,50 @@
+<%= javascript_include_tag "jquery-1.4.1.min" %>
+<%= javascript_include_tag "register" %>
+<%= stylesheet_link_tag "order" %>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= stylesheet_link_tag "D_Planet" %>
+    <%= stylesheet_link_tag "register" %>
+    <div id='title'>Join us. Just take a few seconds to register</div>
+    <div id='0wnAccountdiv'><p>Already have an account? <a href="/users/login">Click here</a> to sign in</p></div>
+    <div id='registerTable'>
+      <div id='userNameField' style='padding-left: 1px '>
+        <%=f.label :userName, 'Username:',:id => 'userNameLabel'%>
+        <%=f.text_field :userName, :id=>'userName',:'data-validate' => '/users/checkName' %>
+        <span id='goodUserName' style='display:none;color:yellow'>This username is available</span>
+        <span id='badUserName' style='display:none;color:red'>This username has been used</span>
+      </div>
+
+      <div id='passwordField' style='padding-left: 1px '>
+        <%=f.label :password, 'Password:',:id => 'passwordLabel'%>
+        <%=f.password_field :password, :id => 'password'%>
+        <span id='patternWrongPwd' style='display:none;color:red'>Password must at least 8 bit long and consist of character,number or symbol</span>
+      </div>
+
+      <div id='confirmation' style='padding-left: 1px '>
+        <%=f.label :password_confirmation, 'Confirm:',:id => 'confirmLabel'%>
+        <%=f.password_field :password_confirmation, :id =>'confirmInput' %>
+        <span id='emptyPwd' style='display:none;color:red'>Password cannot be empty</span>
+        <span id='mismatchPwd' style='display:none;color:red'>Password does not match</span>
+        <span id='rightPwd' style='display:none;color:yellow'>Password ok</span>
+
+      </div>
+
+      <div id='signUp'>
+        <%=f.submit 'Sign Up', :class =>'bluebutton cssbutton', :id =>'submit'%>
+      </div>
+
+
+    </div>
+<% end %>

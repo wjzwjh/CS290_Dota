@@ -1,0 +1,7 @@
+<h1 style="color:red">Welcome back,<%= @user.inspect %></h1>
+
+
+<!--<input type="button" value="Log out" id="signOut">-->
+<%= button_to "Log Out",{:action => "destroy"},{:id =>"signOut"} %>
+<%= link_to 'Store',store_index_path %></a>
+<%= stylesheet_link_tag "register" %>

@@ -1,0 +1,26 @@
+
+<%= stylesheet_link_tag "video_store" %>
+<h2 style="text-align: center;padding: 10px">Dota2 Videos</h2>
+
+
+<%=form_tag video_store_path, :method => 'get' do %>
+    <p>
+      <%= select_tag :kind,options_for_select(["All","Comment","Contest","Tutorial"]), :onchange => "this.form.submit();" , :prompt=>"Version"%>
+    </p>
+<% end %>
+
+<!--<input type="button" value="Log out" id="signOut">-->
+<% @videos.each do |video| %>
+    <div class="entry" style="width:100%">
+      <%= image_tag(video.image_url) %>
+      <h3><%= video.title %></h3>
+
+      <p style="float:left"><%= sanitize(video.description) %></p>
+      <div style="clear:both"></div>
+      <div class="kind_line">
+        <span class="kind"><%= video.kind %></span>
+        <%= link_to 'Watch', video, :id =>"watch_video"%><br/>
+
+      </div>
+    </div>
+<% end %>

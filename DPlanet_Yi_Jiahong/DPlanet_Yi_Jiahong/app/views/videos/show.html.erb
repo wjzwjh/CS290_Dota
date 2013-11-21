@@ -1,0 +1,180 @@
+<%= javascript_include_tag "jwplayer" %>
+<%= javascript_include_tag "jwplayer.html5" %>
+<%= javascript_include_tag "jquery-1.4.1.min" %>
+<%= stylesheet_link_tag "videos" %>
+<p id="notice"><%= notice %></p>
+<style>
+#text_area{
+    float: left ;
+    clear:both;
+    width:660px;
+
+
+}
+        #commentbtn{
+            float: left ;
+            clear:both
+        }
+
+
+            #avatar{
+                width:165px;
+            }
+          #pulldownlist{
+              /*float: left;*/
+              padding-left: 10px;
+              /*clear:both*/
+          }
+        #upload{
+            margin-left: 40px;
+        }
+</style>
+<!--play th e video-->
+<br>
+<!--function only for commentary video-->
+<%if @video.kind=="comment"%>
+    <%files = Dir.glob(Rails.root.to_s+"/public/"+@video.id.to_s+'/*.mp3')%>
+    <%admin=Array.new%>
+    <% files.each do|file|%>
+        <%admin<<(file[Rails.root.to_s.length+@video.id.to_s.length+9,file.length])  %>
+    <%end%>
+
+
+    <!--upload function only for commentary video-->
+    <%if session[:userName]=="ADMIN"%>
+        <div style="float:left;padding-left: 650px">
+          <div style="text-align:right; float:right;margin-right: 40px;">
+            <%= form_for(@video) do |f| %>
+                <%=f.file_field:avatar ,:id=>"avatar"%>
+                <div class="actions" style="display: inline; padding-left: 5px">
+                  <%= f.submit "Upload Audio" , :id =>"upload" %>
+
+                </div>
+                </div>
+                </div>
+            <% end %>
+    <%end%>
+
+
+    <div id="pulldownlist">
+      <%=form_tag videos_path, :method => 'get' do %>
+
+          <%= select_tag :comment_version,options_for_select(admin), :onchange => "this.form.submit();" , :prompt=>"Version"%>
+          <%= hidden_field_tag 'id', @video.id %>
+
+      <% end %>
+    </div>
+    <br/>
+
+    <%if @video.comment_version!="Version" and @video.comment_version!=""%>
+
+        <%temp_id="/"+@video.id.to_s+"/"%>
+        <script type="text/javascript">jwplayer.key="EM0y59lCwb0uR9FL/JIgoq3QWFDpneewOP2x/g==";</script>
+        <div id="music1" style="width: 90%; margin-left: 95px;">Loading the player ...</div>
+        <script type="text/javascript">
+            jwplayer("music1").setup({
+                flashplayer: "<%=asset_path('jwplayer.flash.swf')%>",
+                image:"/cs.jpg",
+                file: "<%=temp_id+@video.comment_version%>",
+                autostart:false,
+                height: 1,
+                width: 1,
+                analytics: {
+                    enabled: false,
+                    cookies: false
+                }
+            });
+        </script>
+    <%end%>
+
+<%end%>
+<script type="text/javascript">jwplayer.key="EM0y59lCwb0uR9FL/JIgoq3QWFDpneewOP2x/g==";</script>
+<center><div id="video" style="width: 90%; margin-left: 95px;">Loading the player ...</div></center>
+<script type="text/javascript">
+
+    jwplayer("video").setup({
+        flashplayer: "<%=asset_path('jwplayer.flash.swf')%>",
+        image:"/1.jpg",
+        file:"<%="/"+@video.video_url.to_s%>",
+//      autostart:true,
+        height: 500,
+        width: 1000,
+        analytics: {
+            enabled: false,
+            cookies: false
+        }
+    });
+
+
+</script>
+
+<!--Video Info, title,description,type,comment//-->
+<p>
+  <b>Title:</b>
+  <%= @video.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @video.description %>
+</p>
+<p>
+  <b>Type:</b>
+  <%= @video.kind %>
+</p>
+<p>
+
+<div id="comment">
+  <%=render @video%>
+</div>
+
+
+<!--Make Comment-->
+<br/>
+<p>
+<div>
+
+<%=form_tag videos_path,:remote => true, :method => 'get' do %>
+
+      <span style="float:left;clear:both;color:#000000;margin-top: 10px;font-size: 13px;font-family: "Times New Roman";">Make Comment:</span>
+      <%= text_area_tag :comment, params[:comment],:cols => "90", :rows => "3" , :id =>"text_area"%><br/>
+      <%= hidden_field_tag 'id', @video.id %><br/>
+      <%= submit_tag "Comment", :name => nil, :id =>"commentbtn"%>
+
+<% end %>
+</div>
+</p>
+
+<!--show edit only to auth-->
+
+
+
+
+<!--sync the video and audio-->
+<%if @video.kind=="comment"%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+ <script>
+    jwplayer("video").setMute(true)
+    jwplayer("music1").setMute(false)
+        jwplayer("video").onSeek(function(event) {
+        console.log (event.offset)
+        jwplayer("music1").seek(event.offset)
+    });
+
+    jwplayer("video").onPause(function(event) {
+        jwplayer("music1").pause(true)
+    });
+
+    jwplayer("video").onPlay(function(event) {
+        jwplayer("music1").play(true)
+    });
+    jwplayer("video").onComplete(function(event) {
+        jwplayer("music1").stop(true)
+    });
+
+
+
+</script>
+<%end%>
+
+

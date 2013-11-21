@@ -1,0 +1,28 @@
+
+#welcomeUser{
+    margin-left: 50px;
+    color:black;
+    float:right;
+    padding:20px 20px 0px 0px;
+    font-size: 20px;
+   
+}
+
+#signOutNow{
+   margin-right: 0px;
+   color:black;
+   margin-right: 0px;
+   padding:20px 20px 0px 0px;
+   font-size: 20px;
+   
+}
+
+#log_out{
+    padding-left: 93.52%
+}
+
+#notSignIn{
+   margin-left: 86%;
+   font-size: 20px;
+
+}

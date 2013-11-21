@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @order.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @order.address %>
+</p>
+
+<p>
+  <b> Email:</b>
+  <%= @order. email %>
+</p>
+
+<p>
+  <b>Pay type:</b>
+  <%= @order.pay_type %>
+</p>
+<%@stocks = Location.near(@order.address, 5000, :order => :distance)%>
+<%@stocks[0].try(:id)%>
+<%stock=Location.find(@stocks[0].try(:id))%>
+<p>
+
+<li><b>Ship From: </b><%=stock.address%></li>
+</p>
+<p>
+<li><b>Shipping Distance: </b><%=@stocks[0].distance.round(3)%>miles</li>
+</p>
+<%=image_tag "http://maps.googleapis.com/maps/api/staticmap?size=1000x600&&scale=6&zoom=4&maptype=hybrid&markers=color:green%7Clabel:S%7C#{@stocks[0].try(:address)}&markers=color:green%7Clabel:S%7C#{@stocks[1].try(:address)}&markers=color:green%7Clabel:S%7C#{@stocks[2].try(:address)}&sensor=false&markers=color:blue%7Clabel:D%7C#{@order.address}&path=color:0x0000ff|weight:5|#{@order.address}|#{stock.address}"%>
+<br>
+
+
+
